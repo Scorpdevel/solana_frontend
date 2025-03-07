@@ -4,6 +4,8 @@ import './App.css'
 type StatusType = {
     balance: number;
 }
+
+//https://solana-backend-xi.vercel.app
 function App() {
     const [status, setStatus] = useState<StatusType>({balance: 0});
     const startBot = async () => {
