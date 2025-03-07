@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 import './App.css'
 
 type StatusType = {
@@ -7,7 +7,7 @@ type StatusType = {
 
 //https://solana-backend-aczn.onrender.com
 function App() {
-    const [status, setStatus] = useState<StatusType>({balance: 0});
+    const [status, setStatus] = useState<StatusType>({balance: -1});
     const startBot = async () => {
         try {
             const response = await fetch("https://solana-backend-aczn.onrender.com/start-bot", {
@@ -38,33 +38,32 @@ function App() {
             const data = await response.json();
             console.log(data)
             setStatus(data);
+            alert('Summe wurde aktualisiert');
         } catch (error) {
             console.error("Fehler beim Abrufen des Status:", error);
         }
     };
 
-    // Status alle 3 Sekunden abrufen
-   useEffect(() => {
-        fetchStatus(); // Direkt beim Laden einmal abrufen
-        const interval = setInterval(fetchStatus, 10000);
 
-        return () => clearInterval(interval); // Cleanup, wenn die Komponente unmountet
+    useEffect(() => {
+        fetchStatus()
     }, []);
 
-
+    if(status.balance <= 0) return <>laed</>
 
   return (
     <>
 <button onClick={() => startBot()}>Start</button>
         <button onClick={() => stopBot()}>stop</button>
-        <h2>Bot-Status:</h2>
+        <h2>Summe:</h2>
         {status ? (
             <>
-            <pre>{status.balance}</pre>
+            <pre>{status.balance} SOL</pre>
             </>
         ) : (
-            <p>⏳ Lade Status...</p>
+            <p onClick={() => fetchStatus()}>⏳ Lade Status...</p>
         )}
+        <button>Status Aktualisieren</button>
     </>
   )
 }
