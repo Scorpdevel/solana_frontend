@@ -61,9 +61,9 @@ function App() {
             <pre>{status.balance} SOL</pre>
             </>
         ) : (
-            <p onClick={() => fetchStatus()}>⏳ Lade Status...</p>
+            <p >⏳ Lade Status...</p>
         )}
-        <button>Status Aktualisieren</button>
+        <button onClick={() => fetchStatus()}>Status Aktualisieren</button>
     </>
   )
 }
