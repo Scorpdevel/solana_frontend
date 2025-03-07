@@ -5,12 +5,12 @@ type StatusType = {
     balance: number;
 }
 
-//https://solana-backend-xi.vercel.app
+//https://solana-backend-aczn.onrender.com
 function App() {
     const [status, setStatus] = useState<StatusType>({balance: 0});
     const startBot = async () => {
         try {
-            const response = await fetch("http://localhost:8081/start-bot", {
+            const response = await fetch("https://solana-backend-aczn.onrender.com/start-bot", {
                 method: "POST",
             });
             const data = await response.json();
@@ -22,7 +22,7 @@ function App() {
 
     const stopBot = async () => {
         try {
-            const response = await fetch("http://localhost:8081/stop-bot", {
+            const response = await fetch("https://solana-backend-aczn.onrender.com/stop-bot", {
                 method: "POST",
             });
             const data = await response.json();
@@ -34,7 +34,7 @@ function App() {
 
     const fetchStatus = async () => {
         try {
-            const response = await fetch("http://localhost:8081/status");
+            const response = await fetch("https://solana-backend-aczn.onrender.com/status");
             const data = await response.json();
             console.log(data)
             setStatus(data);
